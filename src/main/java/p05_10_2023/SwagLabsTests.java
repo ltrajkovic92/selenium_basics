@@ -152,6 +152,16 @@ import java.util.List;
 //        ●	Odskrolati do footera
 //        ●	Validirati sve linkove iz footera da li vracaju status 200. To su linkovi linkedin, facebook i twitter
 
+//        Test #11:(ZA VEZBANJE)  Test Default Name Sort (A-Z)
+//        Podaci:
+//        ●	username: standard_user
+//        ●	password: secret_sauce
+//        Koraci:
+//        ●	Ucitati home stranicu
+//        ●	Uneti username i password
+//        ●	Klik na login dugme
+//        ●	Verifikovati da je url stranice /inventory.html
+//        ●	Proveriti da li su nazivi proizvoda sortirani prema abacednom redu (A-Z)
 
 public class SwagLabsTests {
     private WebDriver driver;
@@ -414,6 +424,29 @@ public class SwagLabsTests {
 
             Assert.assertEquals(statusCode, 200,
                     url + "  is a Broken link - Response Status Code is not 200.");
+        }
+    }
+
+    @Test (priority = 11)
+    public void testDefaultNameSort() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        driver.findElement(By.id("user-name")).sendKeys(username);
+        driver.findElement(By.id("password")).sendKeys(password);
+        driver.findElement(By.id("login-button")).click();
+
+        Assert.assertTrue(driver.getCurrentUrl().contains("/inventory.html"),
+                "Should be redirected to inventory page after login.");
+
+        List<WebElement> products = driver.findElements(By.className("inventory_item_name"));
+
+        String previous = "";
+
+        for (int i = 0; i < products.size(); i++) {
+            Assert.assertFalse(products.get(i).getText().compareTo(previous)<0,
+                    "Products are not sorted in ascending alphabetical order");
+            previous = products.get(i).getText();
         }
     }
 
