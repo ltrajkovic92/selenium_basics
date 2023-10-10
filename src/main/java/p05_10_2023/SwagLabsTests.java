@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -18,10 +19,144 @@ import java.time.Duration;
 import java.util.List;
 
 //    Kreirati klasu SwagLabsTests https://www.saucedemo.com/
+//
+//        Before Method:
+//        ●	Ucitava home stranicu
+//        ●	Brise kolacice
+//
+//        Test #1:  Verify error is displayed when username is missing
+//        Koraci:
+//        ●	Ucitati home stranicu
+//        ●	Klik na login dugme
+//        ●	Verifikovati da je prikazana poruka Epic sadface: Username is required
+//
+//        Test #2:  Verify error is displayed when password is missing
+//        Koraci:
+//        ●	Ucitati home stranicu
+//        ●	Uneti username
+//        ●	Klik na login dugme
+//        ●	Verifikovati da je prikazana poruka Epic sadface: Password is required
+//
+//        Test #3:  Verify error is displayed when credentials are wrong
+//        Podaci:
+//        ●	username: standard_user
+//        ●	password: invalidpassword
+//        Koraci:
+//        ●	Ucitati home stranicu
+//        ●	Uneti username i password
+//        ●	Klik na login dugme
+//        ●	Verifikovati da je prikazana poruka Epic sadface: Username and password do not match any user in this service
+//
+//        Test #4:  Verify error is displayed when user is locked
+//        Podaci:
+//        ●	username: locked_out_user
+//        ●	password: secret_sauce
+//        Koraci:
+//        ●	Ucitati home stranicu
+//        ●	Uneti username i password
+//        ●	Klik na login dugme
+//        ●	Verifikovati da je prikazana poruka Epic sadface: Sorry, this user has been locked out.
+//
+//
+//        Test #5:  Verify successful login
+//        Podaci:
+//        ●	username: standard_user
+//        ●	password: secret_sauce
+//        Koraci:
+//        ●	Ucitati home stranicu
+//        ●	Uneti username i password
+//        ●	Klik na login dugme
+//        ●	Verifikovati da je url stranice /inventory.html
+//        ●	Klik na Menu iz gornjeg lovog ugla
+//        ●	Sacekati da se prikaze meni
+//        ●	Verifikovati da Logout dugme postoji
+//        ●	Klik na logout
+//        ●	Verifikovati da je prikazana login forma
+//
+//        Test #6:  Adding Products to Cart
+//        Podaci:
+//        ●	username: standard_user
+//        ●	password: secret_sauce
+//        Koraci:
+//        ●	Ucitati home stranicu
+//        ●	Uneti username i password
+//        ●	Klik na login dugme
+//        ●	Verifikovati da je url stranice /inventory.html
+//        ●	Pronađite proizvod "Sauce Labs Backpack" na početnoj stranici.
+//        ●	Klik na Add to cart pored proizvoda.
+//        ●	Proverite da se pojavilo Remove dugme
+//        ●	Proverite da li se broj proizvoda u korpi povećao na 1.
+//
+//        Test #7: Viewing Product Details
+//        Podaci:
+//        ●	username: standard_user
+//        ●	password: secret_sauce
+//        Koraci:
+//        ●	Ucitati home stranicu
+//        ●	Uneti username i password
+//        ●	Klik na login dugme
+//        ●	Verifikovati da je url stranice /inventory.html
+//        ●	Pronađite proizvod "Sauce Labs Backpack" na početnoj stranici.
+//        ●	Klik na proizvod
+//        ●	Proverite da li se prikazuju detalji proizvoda, uključujući cenu, opis i dugme za dodavanje u korpu
+//
+//        Test #8: Removing Products from Cart
+//        Podaci:
+//        ●	username: standard_user
+//        ●	password: secret_sauce
+//        Koraci:
+//        ●	Ucitati home stranicu
+//        ●	Uneti username i password
+//        ●	Klik na login dugme
+//        ●	Verifikovati da je url stranice /inventory.html
+//        ●	Pronađite proizvod "Sauce Labs Backpack" na početnoj stranici.
+//        ●	Klik na Add to cart pored proizvoda.
+//        ●	Proverite da li se broj proizvoda u korpi povećao na 1.
+//        ●	Kliknuti na korpu iz navigacije
+//        ●	Proverite da li se proizvod "Sauce Labs Backpack" ubacio u korpu.
+//        ●	Klik na Remove dugme pored proizvoda
+//        ●	Proverite da li se proizvod "Sauce Labs Backpack" izbacio iz korpe.
+//
+//        Test #9: Product Checkout
+//        Podaci:
+//        ●	username: standard_user
+//        ●	password: secret_sauce
+//        ●	checkout name: Pera
+//        ●	checkout last name: Peric
+//        ●	checkout zip: 18000
+//        Koraci:
+//        ●	Ucitati home stranicu
+//        ●	Uneti username i password
+//        ●	Klik na login dugme
+//        ●	Verifikovati da je url stranice /inventory.html
+//        ●	Pronađite proizvod "Sauce Labs Backpack" na početnoj stranici.
+//        ●	Klik na Add to cart pored proizvoda.
+//        ●	Proverite da li se broj proizvoda u korpi povećao na 1.
+//        ●	Kliknuti na korpu iz navigacije
+//        ●	Klik na checkout dugme iz korpe
+//        ●	Unesite podatke za checkout formu
+//        ●	Klik na continue
+//        ●	Proverite da li su podaci na Checkout: Overview stranici ispravni
+//        ●	Klik na finish
+//        ●	Validirati da se prikazuje poruka za uspesno porucivanje Thank you for your order!
+
+//        Test #10:  Validate Social Links in Footer
+//        Podaci:
+//        ●	username: standard_user
+//        ●	password: secret_sauce
+//        Koraci:
+//        ●	Ucitati home stranicu
+//        ●	Uneti username i password
+//        ●	Klik na login dugme
+//        ●	Verifikovati da je url stranice /inventory.html
+//        ●	Odskrolati do footera
+//        ●	Validirati sve linkove iz footera da li vracaju status 200. To su linkovi linkedin, facebook i twitter
+
+
 public class SwagLabsTests {
     private WebDriver driver;
     private WebDriverWait wait;
-    private String baseUrl = "https://www.saucedemo.com/ ";
+    private String baseUrl = "https://www.saucedemo.com/";
 
     @BeforeClass
     public void setup () {
@@ -155,7 +290,7 @@ public class SwagLabsTests {
         driver.findElement(By.className("submit-button")).click();
 
         Assert.assertTrue(driver.getCurrentUrl().contains("/inventory.html"),
-                "Url should contain '/inventory.html'");
+                "Should be redirected to inventory page after login.");
         driver.findElement(By.id("item_4_img_link")).click();
 
         wait
@@ -190,7 +325,7 @@ public class SwagLabsTests {
         driver.findElement(By.className("submit-button")).click();
 
         Assert.assertTrue(driver.getCurrentUrl().contains("/inventory.html"),
-                "Url should contain '/inventory.html'");
+                "Should be redirected to inventory page after login.");
 
         driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
 
@@ -223,7 +358,7 @@ public class SwagLabsTests {
         driver.findElement(By.className("submit-button")).click();
 
         Assert.assertTrue(driver.getCurrentUrl().contains("/inventory.html"),
-                "Url should contain '/inventory.html'");
+                "Should be redirected to inventory page after login.");
 
         driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
 
@@ -255,7 +390,7 @@ public class SwagLabsTests {
 
 //    DOMACI
 //    Test #10:  Validate Social Links in Footer
-    @Test
+    @Test (priority = 10)
     public void validateSocialLinksInFooter() throws IOException {
         String username = "standard_user";
         String password = "secret_sauce";
@@ -265,7 +400,7 @@ public class SwagLabsTests {
         driver.findElement(By.className("submit-button")).click();
 
         Assert.assertTrue(driver.getCurrentUrl().contains("/inventory.html"),
-                "Url should contain '/inventory.html'");
+                "Should be redirected to inventory page after login.");
 
         new Actions(driver)
                 .scrollToElement(driver.findElement(By.className("footer")))
