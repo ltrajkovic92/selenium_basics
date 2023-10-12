@@ -48,6 +48,9 @@ public class TopNavPage extends BasicPage {
     public void clickOnShoppingCartButton() {
         getShoppingCartButton().click();
     }
+    public boolean doesShoppingCartIconIsEnabled () {
+        return getShoppingCartButton().isEnabled();
+    }
 
     public boolean isHeaderTitle(String title) {
         return driver.findElement(By.className("header_label")).getText().equals(title);
