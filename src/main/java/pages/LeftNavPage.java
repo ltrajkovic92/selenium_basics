@@ -19,6 +19,7 @@ public class LeftNavPage extends BasicPage {
                 .until(ExpectedConditions.visibilityOfElementLocated(By.className("bm-menu-wrap")));
 
     }
+
     public boolean doesLogoutButtonExist() {
         return elementExists(By.linkText("Logout"), 1);
     }
@@ -27,11 +28,31 @@ public class LeftNavPage extends BasicPage {
         return driver.findElement(By.linkText("Logout"));
     }
 
-    public void clickLogoutButton(){
+    public void clickLogoutButton() {
         getLogoutLink().click();
     }
-    public int numberOfMenuOptions () {
+
+    public int numberOfMenuOptions() {
         List<WebElement> options = driver.findElements(By.cssSelector(".bm-item-list a"));
         return options.size();
     }
+
+    public List<WebElement> getMenuOptions() {
+        return driver.findElements(By.cssSelector(".bm-item-list>a"));
+    }
+
+    public boolean isSpellingAllMenuOptionsCorrect() {
+        boolean correctSpelling = false;
+
+        List<WebElement> menuItems = getMenuOptions();
+
+        if (menuItems.get(0).getText().equals("All Items")
+                && menuItems.get(1).getText().equals("About")
+                && menuItems.get(2).getText().equals("Logout")
+                && menuItems.get(3).getText().equals("Reset App State")) {
+            correctSpelling = true;
+        }
+        return correctSpelling;
+    }
 }
+

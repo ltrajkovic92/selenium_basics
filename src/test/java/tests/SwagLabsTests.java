@@ -1,9 +1,12 @@
 package tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import retry.SwagLabsRetry;
+
+import java.util.List;
 
 public class SwagLabsTests extends BasicTest {
 
@@ -286,5 +289,22 @@ public class SwagLabsTests extends BasicTest {
 
         Assert.assertEquals(leftNavPage.numberOfMenuOptions(),4,
                 "There should be four menu options.");
+    }
+
+    @Test(priority = 19, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyTheSpellingOfAllOptionsInMenu () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        topNavPage.clickOnShoppingCartButton();
+        topNavPage.clickMenuButton();
+        leftNavPage.waitForMenuToBeVisible();
+
+        Assert.assertTrue(leftNavPage.isSpellingAllMenuOptionsCorrect(),
+                "Menu options are not correctly spelled.");
     }
 }
