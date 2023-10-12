@@ -54,5 +54,11 @@ public class LeftNavPage extends BasicPage {
         }
         return correctSpelling;
     }
+    public WebElement getAllItems(){
+        return driver.findElement(By.linkText("All Items"));
+    }
+    public void clickAllItems(){
+        getAllItems().click();
+    }
 }
 

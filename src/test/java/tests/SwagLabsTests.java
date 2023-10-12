@@ -1,12 +1,10 @@
 package tests;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import retry.SwagLabsRetry;
 
-import java.util.List;
 
 public class SwagLabsTests extends BasicTest {
 
@@ -306,5 +304,23 @@ public class SwagLabsTests extends BasicTest {
 
         Assert.assertTrue(leftNavPage.isSpellingAllMenuOptionsCorrect(),
                 "Menu options are not correctly spelled.");
+    }
+
+    @Test (priority = 20, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfAllItemsOptionIsWorking(){
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        topNavPage.clickOnShoppingCartButton();
+        topNavPage.clickMenuButton();
+
+        leftNavPage.clickAllItems();
+
+        Assert.assertTrue(pageUrl.isInventory(),
+                "Should be redirected to the inventory page after clicking on all items link.");
     }
 }
