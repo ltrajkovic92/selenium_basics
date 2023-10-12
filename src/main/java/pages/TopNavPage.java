@@ -25,6 +25,9 @@ public class TopNavPage extends BasicPage {
     public void clickMenuButton() {
         getMenuButton().click();
     }
+    public boolean doesHamburgerMenuIsEnabled(){
+        return getMenuButton().isEnabled();
+    }
 
     public WebElement getShoppingCartBadge() {
         return driver.findElement(By.className("shopping_cart_badge"));
