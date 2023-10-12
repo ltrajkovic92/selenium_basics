@@ -153,4 +153,17 @@ public class SwagLabsTests extends BasicTest {
         Assert.assertTrue(topNavPage.isHeaderTitleOfTheCartPage(),
                 "Header title on cart page should be " + topNavPage.headerTitleCart);
     }
+
+    @Test(priority = 10, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheHamburgerMenuButtonIsPresented () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        topNavPage.clickOnShoppingCartButton();
+        topNavPage.waitForHamburgerButton();
+    }
 }

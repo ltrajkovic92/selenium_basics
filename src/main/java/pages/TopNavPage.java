@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TopNavPage extends BasicPage {
@@ -15,6 +16,10 @@ public class TopNavPage extends BasicPage {
 
     public WebElement getMenuButton() {
         return driver.findElement(By.id("react-burger-menu-btn"));
+    }
+    public void waitForHamburgerButton(){
+        wait.withMessage("Hamburger button is not presented")
+                .until(ExpectedConditions.visibilityOf(getMenuButton()));
     }
 
     public void clickMenuButton() {
