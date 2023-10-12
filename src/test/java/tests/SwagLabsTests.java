@@ -341,4 +341,23 @@ public class SwagLabsTests extends BasicTest {
         Assert.assertTrue(pageUrl.isSouceLabsPage(),
                 "Should be redirected to the " + pageUrl.souceLabs + " after clicking on about link.");
     }
+
+    @Test (priority = 22, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfLogoutOptionIsWorking () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        topNavPage.clickOnShoppingCartButton();
+        topNavPage.clickMenuButton();
+
+        leftNavPage.clickLogoutButton();
+
+        Assert.assertTrue(
+                loginPage.doesUsernameInputExist(),
+                "Should be redirected to login page after logout.");
+    }
 }
