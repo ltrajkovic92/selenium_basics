@@ -138,4 +138,19 @@ public class SwagLabsTests extends BasicTest {
         Assert.assertTrue(pageTitle.isCartTitle(),
                 "Title on cart page should be " + pageTitle.cartTitle);
     }
+
+    @Test (priority = 9, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyTheHeaderTitleOfTheCartPage () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        topNavPage.clickOnShoppingCartButton();
+
+        Assert.assertTrue(topNavPage.isHeaderTitleOfTheCartPage(),
+                "Header title on cart page should be " + topNavPage.headerTitleCart);
+    }
 }

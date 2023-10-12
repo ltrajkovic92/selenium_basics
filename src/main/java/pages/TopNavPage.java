@@ -7,31 +7,41 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TopNavPage extends BasicPage {
 
+    public String headerTitleCart = "Swag Labs";
+
     public TopNavPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
 
-    public WebElement getMenuButton () {
+    public WebElement getMenuButton() {
         return driver.findElement(By.id("react-burger-menu-btn"));
     }
 
-    public void clickMenuButton () {
+    public void clickMenuButton() {
         getMenuButton().click();
     }
 
-    public WebElement getShoppingCartBadge(){
+    public WebElement getShoppingCartBadge() {
         return driver.findElement(By.className("shopping_cart_badge"));
     }
 
-    public String getShoppingCartBadgeText(){
+    public String getShoppingCartBadgeText() {
         return getShoppingCartBadge().getText();
     }
 
-    public WebElement getShoppingCartButton () {
+    public WebElement getShoppingCartButton() {
         return driver.findElement(By.className("shopping_cart_link"));
     }
 
-    public void clickOnShoppingCartButton () {
+    public void clickOnShoppingCartButton() {
         getShoppingCartButton().click();
+    }
+
+    public boolean isHeaderTitle(String title) {
+        return driver.findElement(By.className("header_label")).getText().equals(title);
+    }
+
+    public boolean isHeaderTitleOfTheCartPage() {
+        return isHeaderTitle(headerTitleCart);
     }
 }
