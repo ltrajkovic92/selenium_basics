@@ -120,4 +120,22 @@ public class SwagLabsTests extends BasicTest {
         Assert.assertTrue(pageUrl.isCartPage(),
                    "After clicking on the cart button, should be redirected to the cart page.");
     }
+
+    @Test(priority = 8, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyTheTitleOfCartPage () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        inventoryPage.scrollToProductName("Sauce Labs Backpack");
+        inventoryPage.addItemToCart(By.id("add-to-cart-sauce-labs-backpack"));
+
+        topNavPage.clickOnShoppingCartButton();
+
+        Assert.assertTrue(pageTitle.isCartTitle(),
+                "Title on cart page should be " + pageTitle.cartTitle);
+    }
 }

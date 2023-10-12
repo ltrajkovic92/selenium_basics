@@ -23,6 +23,7 @@ public abstract class BasicTest {
     protected TopNavPage topNavPage;
     protected LeftNavPage leftNavPage;
     protected InventoryPage inventoryPage;
+    protected PageTitle pageTitle;
 
     @BeforeClass
     public void setup () {
@@ -36,6 +37,7 @@ public abstract class BasicTest {
         topNavPage = new TopNavPage(driver,wait);
         leftNavPage = new LeftNavPage(driver,wait);
         inventoryPage = new InventoryPage(driver,wait);
+        pageTitle = new PageTitle(driver,wait);
     }
 
     @BeforeMethod
