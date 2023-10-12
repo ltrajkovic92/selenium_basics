@@ -166,4 +166,17 @@ public class SwagLabsTests extends BasicTest {
         topNavPage.clickOnShoppingCartButton();
         topNavPage.waitForHamburgerButton();
     }
+
+    @Test(priority = 11, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheCartIconIsPresented () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        topNavPage.clickOnShoppingCartButton();
+        topNavPage.waitForCartIcon();
+    }
 }

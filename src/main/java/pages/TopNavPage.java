@@ -37,6 +37,10 @@ public class TopNavPage extends BasicPage {
     public WebElement getShoppingCartButton() {
         return driver.findElement(By.className("shopping_cart_link"));
     }
+    public void waitForCartIcon(){
+        wait.withMessage("Cart icon is not presented")
+                .until(ExpectedConditions.visibilityOf(getShoppingCartButton()));
+    }
 
     public void clickOnShoppingCartButton() {
         getShoppingCartButton().click();
