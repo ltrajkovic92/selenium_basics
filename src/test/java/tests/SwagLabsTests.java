@@ -104,4 +104,20 @@ public class SwagLabsTests extends BasicTest {
         Assert.assertEquals(topNavPage.getShoppingCartBadgeText(),"1",
         "The number in the cart should increase by one more product, after adding to the cart.");
     }
+
+
+    @Test (priority = 7, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyTheUrlOnTheCartPage() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        topNavPage.clickOnShoppingCartButton();
+
+        Assert.assertTrue(pageUrl.isCartPage(),
+                   "After clicking on the cart button, should be redirected to the cart page.");
+    }
 }

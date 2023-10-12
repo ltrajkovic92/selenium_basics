@@ -26,4 +26,12 @@ public class TopNavPage extends BasicPage {
     public String getShoppingCartBadgeText(){
         return getShoppingCartBadge().getText();
     }
+
+    public WebElement getShoppingCartButton () {
+        return driver.findElement(By.className("shopping_cart_link"));
+    }
+
+    public void clickOnShoppingCartButton () {
+        getShoppingCartButton().click();
+    }
 }
