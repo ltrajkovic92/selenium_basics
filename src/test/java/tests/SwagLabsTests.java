@@ -323,4 +323,22 @@ public class SwagLabsTests extends BasicTest {
         Assert.assertTrue(pageUrl.isInventory(),
                 "Should be redirected to the inventory page after clicking on all items link.");
     }
+
+    @Test(priority = 21, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfAboutOptionIsWorking () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        topNavPage.clickOnShoppingCartButton();
+        topNavPage.clickMenuButton();
+
+        leftNavPage.clickAbout();
+
+        Assert.assertTrue(pageUrl.isSouceLabsPage(),
+                "Should be redirected to the " + pageUrl.souceLabs + " after clicking on about link.");
+    }
 }
