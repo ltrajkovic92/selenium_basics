@@ -47,4 +47,7 @@ public class CartPage extends BasicPage{
                 .withMessage("Remove button is not visible in the cart.")
                 .until(ExpectedConditions.visibilityOf(getRemoveButton()));
     }
+    public void clickOnRemoveButton () {
+        getRemoveButton().click();
+    }
 }
