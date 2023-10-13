@@ -11,6 +11,7 @@ public class PageUrl extends BasicPage {
     public String checkoutPage = "checkout-step-one.html";
     public String sauceLabsTwitterAccount = "https://twitter.com/saucelabs";
     public String sauceLabsFacebookAccount = "https://www.facebook.com/saucelabs";
+    public String sauceLabsLinkedInAccount = "https://www.linkedin.com/company/sauce-labs/";
 
     public PageUrl(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -41,5 +42,8 @@ public class PageUrl extends BasicPage {
     }
     public boolean isSauceLabsFacebookAccount () {
         return isPage(sauceLabsFacebookAccount);
+    }
+    public boolean isSauceLabsLinkedInAccount () {
+        return isPage(sauceLabsLinkedInAccount);
     }
 }

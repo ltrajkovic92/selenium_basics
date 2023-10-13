@@ -724,4 +724,24 @@ public class SwagLabsTests extends BasicTest {
         Assert.assertTrue(pageUrl.isSauceLabsFacebookAccount(),
                 "Should be redirected to the Sauce Labs facebook account.");
     }
+
+    @Test (priority = 44, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheLinkedInButtonIsWorking () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        topNavPage.clickOnShoppingCartButton();
+
+        footer.scrollToFooter();
+        footer.clickOnTheLinkedInButton();
+
+        pageUrl.switchToNewTab();
+
+        Assert.assertTrue(pageUrl.isSauceLabsLinkedInAccount(),
+                "Should be redirected to the Sauce Labs linkedin account.");
+    }
 }
