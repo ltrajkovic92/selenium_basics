@@ -72,5 +72,8 @@ public class LeftNavPage extends BasicPage {
     public void clickResetAppState () {
         getResetAppState().click();
     }
+    public boolean doesEkisButtonExistInMenu () {
+        return elementExists(By.id ("react-burger-cross-btn"));
+    }
 }
 

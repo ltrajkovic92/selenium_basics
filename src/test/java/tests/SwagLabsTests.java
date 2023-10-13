@@ -383,4 +383,21 @@ public class SwagLabsTests extends BasicTest {
         Assert.assertEquals(doesBadgeExistsAfterReset,!doesBagdeExists,
                 "Reset App State option is not working.");
     }
+
+    @Test (priority = 24, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheEkisButtonIsPresented () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        topNavPage.clickOnShoppingCartButton();
+        topNavPage.clickMenuButton();
+        leftNavPage.waitForMenuToBeVisible();
+
+        Assert.assertTrue(leftNavPage.doesEkisButtonExistInMenu(),
+                "Ekis button should be visible in menu.");
+    }
 }
