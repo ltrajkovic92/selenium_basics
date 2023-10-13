@@ -27,6 +27,9 @@ public class CartPage extends BasicPage{
     public WebElement getContinueShoppingButton () {
         return driver.findElement(By.id("continue-shopping"));
     }
+    public WebElement getCheckoutButton () {
+        return driver.findElement(By.id("checkout"));
+    }
     public boolean doesItemTitleIsPresented () {
         return elementExists(By.className("inventory_item_name"));
     }

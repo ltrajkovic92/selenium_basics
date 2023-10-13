@@ -599,4 +599,20 @@ public class SwagLabsTests extends BasicTest {
         Assert.assertTrue(pageUrl.isInventory(),
                 "Should be redirected to inventory page after clicking on continue shopping button.");
     }
+
+    @Test (priority = 37, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheCheckoutButtonIsPresented () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        inventoryPage.addItemToCart(By.id("add-to-cart-sauce-labs-backpack"));
+        topNavPage.clickOnShoppingCartButton();
+
+        Assert.assertTrue(cartPage.getCheckoutButton().isDisplayed(),
+                "Checkout button should be visible.");
+    }
 }
