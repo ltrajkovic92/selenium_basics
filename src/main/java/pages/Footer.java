@@ -16,7 +16,10 @@ public class Footer extends BasicPage{
     }
 
     public WebElement getTwitter () {
-        return driver.findElement(By.cssSelector(".social_linkedin>a"));
+        return driver.findElement(By.cssSelector(".social_twitter>a"));
+    }
+    public WebElement getFacebook () {
+        return driver.findElement(By.cssSelector(".social_facebook>a"));
     }
 
     public void scrollToFooter () {
