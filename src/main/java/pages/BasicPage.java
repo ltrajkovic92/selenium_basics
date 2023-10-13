@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class BasicPage {
     protected WebDriver driver;
@@ -23,5 +25,9 @@ public abstract class BasicPage {
         boolean elementExists = !driver.findElements(by).isEmpty();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         return elementExists;
+    }
+    public void switchToNewTab () {
+        List<String> browserTabs = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(browserTabs.get(1));
     }
 }

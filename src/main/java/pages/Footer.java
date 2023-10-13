@@ -28,4 +28,7 @@ public class Footer extends BasicPage{
     public void scrollToFooter () {
         new Actions(driver).scrollToElement(getFooter()).perform();
     }
+    public void clickOnTheTwitterButton () {
+        getTwitter().click();
+    }
 }

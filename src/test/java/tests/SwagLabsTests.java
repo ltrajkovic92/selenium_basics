@@ -684,4 +684,24 @@ public class SwagLabsTests extends BasicTest {
         Assert.assertTrue(footer.getLinkedIn().isDisplayed(),
                 "LinkedIn button should be visible.");
     }
+
+    @Test (priority = 42, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheTwitterButtonWorking () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        topNavPage.clickOnShoppingCartButton();
+
+        footer.scrollToFooter();
+        footer.clickOnTheTwitterButton();
+
+        pageUrl.switchToNewTab();
+
+        Assert.assertTrue(pageUrl.isSauceLabsTwitterAccount(),
+                "Should be redirected to the Souce Labs twitter account.");
+    }
 }
