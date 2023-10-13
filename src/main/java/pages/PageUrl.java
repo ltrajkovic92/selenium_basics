@@ -8,6 +8,7 @@ public class PageUrl extends BasicPage {
     public String cartPage = "/cart.html";
     public String souceLabs = "https://saucelabs.com/";
     public String inventoryItem = "inventory-item.html";
+    public String checkoutPage = "checkout-step-one.html";
 
     public PageUrl(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -29,5 +30,8 @@ public class PageUrl extends BasicPage {
     }
     public boolean isInventoryItemPage () {
         return isPage(inventoryItem);
+    }
+    public boolean isCheckoutPage () {
+        return isPage(checkoutPage);
     }
 }

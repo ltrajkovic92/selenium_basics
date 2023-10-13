@@ -59,4 +59,7 @@ public class CartPage extends BasicPage{
     public void clickOnContinueShoppingButton () {
         getContinueShoppingButton().click();
     }
+    public void clickOnCheckoutButton () {
+        getCheckoutButton().click();
+    }
 }

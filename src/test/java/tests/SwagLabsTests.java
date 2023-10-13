@@ -615,4 +615,22 @@ public class SwagLabsTests extends BasicTest {
         Assert.assertTrue(cartPage.getCheckoutButton().isDisplayed(),
                 "Checkout button should be visible.");
     }
+
+    @Test (priority = 38, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfCheckoutButtonIsWorking () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        inventoryPage.addItemToCart(By.id("add-to-cart-sauce-labs-backpack"));
+        topNavPage.clickOnShoppingCartButton();
+
+        cartPage.clickOnCheckoutButton();
+
+        Assert.assertTrue(pageUrl.isCheckoutPage(),
+                "Should be redirected to the checkout page.");
+    }
 }
