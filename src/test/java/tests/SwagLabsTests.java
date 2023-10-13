@@ -565,4 +565,20 @@ public class SwagLabsTests extends BasicTest {
         Assert.assertFalse(cartPage.doesAddedItemsExist(),
                 "Added item is not removed.");
     }
+
+    @Test (priority = 35, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheContinueShoppingButtonIsPresented () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        inventoryPage.addItemToCart(By.id("add-to-cart-sauce-labs-backpack"));
+        topNavPage.clickOnShoppingCartButton();
+
+        Assert.assertTrue(cartPage.getContinueShoppingButton().isDisplayed(),
+                "Continue shopping button should be visible.");
+    }
 }

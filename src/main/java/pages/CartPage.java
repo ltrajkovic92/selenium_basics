@@ -24,6 +24,9 @@ public class CartPage extends BasicPage{
     public WebElement getRemoveButton () {
         return driver.findElement(By.xpath("//button[text()='Remove']"));
     }
+    public WebElement getContinueShoppingButton () {
+        return driver.findElement(By.id("continue-shopping"));
+    }
     public boolean doesItemTitleIsPresented () {
         return elementExists(By.className("inventory_item_name"));
     }
