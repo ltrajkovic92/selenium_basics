@@ -7,6 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Footer extends BasicPage{
+    public String expectedCopyRightMessage = "© 2023 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy";
     public Footer(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
@@ -23,6 +24,12 @@ public class Footer extends BasicPage{
     }
     public WebElement getLinkedIn () {
         return driver.findElement(By.cssSelector(".social_linkedin>a"));
+    }
+    public WebElement getCopyRight () {
+        return driver.findElement(By.className("footer_copy"));
+    }
+    public String getTextFromCopyRight () {
+        return getCopyRight().getText();
     }
 
     public void scrollToFooter () {

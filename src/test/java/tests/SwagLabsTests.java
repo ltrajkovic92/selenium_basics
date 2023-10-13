@@ -744,4 +744,20 @@ public class SwagLabsTests extends BasicTest {
         Assert.assertTrue(pageUrl.isSauceLabsLinkedInAccount(),
                 "Should be redirected to the Sauce Labs linkedin account.");
     }
+
+    @Test (priority = 45, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyTheCopyRightNoticeMessage () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        topNavPage.clickOnShoppingCartButton();
+        footer.scrollToFooter();
+
+        Assert.assertEquals(footer.getTextFromCopyRight(), footer.expectedCopyRightMessage,
+                "The copyright message is not correct");
+    }
 }
