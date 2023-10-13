@@ -686,7 +686,7 @@ public class SwagLabsTests extends BasicTest {
     }
 
     @Test (priority = 42, retryAnalyzer = SwagLabsRetry.class)
-    public void verifyIfTheTwitterButtonWorking () {
+    public void verifyIfTheTwitterButtonIsWorking () {
         String username = "standard_user";
         String password = "secret_sauce";
 
@@ -702,6 +702,26 @@ public class SwagLabsTests extends BasicTest {
         pageUrl.switchToNewTab();
 
         Assert.assertTrue(pageUrl.isSauceLabsTwitterAccount(),
-                "Should be redirected to the Souce Labs twitter account.");
+                "Should be redirected to the Sauce Labs twitter account.");
+    }
+
+    @Test (priority = 43, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheFacebookButtonIsWorking () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        topNavPage.clickOnShoppingCartButton();
+
+        footer.scrollToFooter();
+        footer.clickOnTheFacebookButton();
+
+        pageUrl.switchToNewTab();
+
+        Assert.assertTrue(pageUrl.isSauceLabsFacebookAccount(),
+                "Should be redirected to the Sauce Labs facebook account.");
     }
 }

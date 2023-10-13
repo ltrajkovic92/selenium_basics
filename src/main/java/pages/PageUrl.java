@@ -9,7 +9,8 @@ public class PageUrl extends BasicPage {
     public String souceLabs = "https://saucelabs.com/";
     public String inventoryItem = "inventory-item.html";
     public String checkoutPage = "checkout-step-one.html";
-    public String souceLabsTwitterAccount = "https://twitter.com/saucelabs";
+    public String sauceLabsTwitterAccount = "https://twitter.com/saucelabs";
+    public String sauceLabsFacebookAccount = "https://www.facebook.com/saucelabs";
 
     public PageUrl(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -36,6 +37,9 @@ public class PageUrl extends BasicPage {
         return isPage(checkoutPage);
     }
     public boolean isSauceLabsTwitterAccount () {
-        return isPage(souceLabsTwitterAccount);
+        return isPage(sauceLabsTwitterAccount);
+    }
+    public boolean isSauceLabsFacebookAccount () {
+        return isPage(sauceLabsFacebookAccount);
     }
 }
