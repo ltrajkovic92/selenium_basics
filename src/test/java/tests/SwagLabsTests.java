@@ -443,7 +443,6 @@ public class SwagLabsTests extends BasicTest {
     public void verifyIfTheItemsTitleIsPresented () {
         String username = "standard_user";
         String password = "secret_sauce";
-        String nameOfAddedItem = "Sauce Labs Backpack";
 
         loginPage.clearAndTypeUsername(username);
         loginPage.clearAndTypePassword(password);
@@ -460,7 +459,6 @@ public class SwagLabsTests extends BasicTest {
     public void verifyIfTheItemsDescriptionIsPresented () {
         String username = "standard_user";
         String password = "secret_sauce";
-        String nameOfAddedItem = "Sauce Labs Backpack";
 
         loginPage.clearAndTypeUsername(username);
         loginPage.clearAndTypePassword(password);
@@ -471,5 +469,21 @@ public class SwagLabsTests extends BasicTest {
 
         Assert.assertTrue(cartPage.doesItemDescriptionIsPresented(),
                 "Description of the added item should be visible.");
+    }
+
+    @Test (priority = 29, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheItemsPriceIsPresented () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        inventoryPage.addItemToCart(By.id("add-to-cart-sauce-labs-backpack"));
+        topNavPage.clickOnShoppingCartButton();
+
+        Assert.assertTrue(cartPage.doesItemPriceIsPresented(),
+                "Price of the added item should be visible.");
     }
 }
