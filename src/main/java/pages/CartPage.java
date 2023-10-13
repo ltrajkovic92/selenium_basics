@@ -21,6 +21,9 @@ public class CartPage extends BasicPage{
     public String getNameFromAddedItem () {
         return getItemTitleElement().getText();
     }
+    public WebElement getRemoveButton () {
+        return driver.findElement(By.xpath("//button[text()='Remove']"));
+    }
     public boolean doesItemTitleIsPresented () {
         return elementExists(By.className("inventory_item_name"));
     }
@@ -38,5 +41,10 @@ public class CartPage extends BasicPage{
         wait
                 .withMessage("Item title should be clickable.")
                 .until(ExpectedConditions.elementToBeClickable(getItemTitleElement())).click();
+    }
+    public void waitForRemoveButtonToBeVisible () {
+        wait
+                .withMessage("Remove button is not visible in the cart.")
+                .until(ExpectedConditions.visibilityOf(getRemoveButton()));
     }
 }

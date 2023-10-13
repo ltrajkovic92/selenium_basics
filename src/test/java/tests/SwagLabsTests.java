@@ -533,4 +533,19 @@ public class SwagLabsTests extends BasicTest {
         Assert.assertTrue(pageUrl.isInventoryItemPage(),
                 "Should be redirected to inventory item page after clicking on item title.");
     }
+
+    @Test (priority = 33, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheRemoveButtonIsPresented () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        inventoryPage.addItemToCart(By.id("add-to-cart-sauce-labs-backpack"));
+        topNavPage.clickOnShoppingCartButton();
+
+        cartPage.waitForRemoveButtonToBeVisible();
+    }
 }
