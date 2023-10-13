@@ -360,4 +360,27 @@ public class SwagLabsTests extends BasicTest {
                 loginPage.doesUsernameInputExist(),
                 "Should be redirected to login page after logout.");
     }
+
+    @Test (priority = 23, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfResetAppStateIsWorking () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+        inventoryPage.addItemToCart(By.id("add-to-cart-sauce-labs-backpack"));
+
+        boolean doesBagdeExists = topNavPage.doesCartBadgeExists();
+
+        topNavPage.clickOnShoppingCartButton();
+        topNavPage.clickMenuButton();
+        leftNavPage.waitForMenuToBeVisible();
+        leftNavPage.clickResetAppState();
+
+        boolean doesBadgeExistsAfterReset = topNavPage.doesCartBadgeExists();
+
+        Assert.assertEquals(doesBadgeExistsAfterReset,!doesBagdeExists,
+                "Reset App State option is not working.");
+    }
 }
