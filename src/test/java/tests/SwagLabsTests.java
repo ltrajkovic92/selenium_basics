@@ -3,6 +3,7 @@ package tests;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.CartPage;
 import retry.SwagLabsRetry;
 
 
@@ -416,5 +417,25 @@ public class SwagLabsTests extends BasicTest {
         leftNavPage.clickEkisButton();
 
         leftNavPage.waitForMenuToBeInvisible();
+    }
+
+    @Test (priority = 26, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheItemsAddedIsPresented () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+        String nameOfAddedItem = "Sauce Labs Backpack";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        inventoryPage.addItemToCart(By.id("add-to-cart-sauce-labs-backpack"));
+        topNavPage.clickOnShoppingCartButton();
+
+        Assert.assertTrue(cartPage.doesAddedItemsExist(),
+                "There are no items in the cart.");
+
+        Assert.assertEquals(cartPage.getNameFromAddedItem(),nameOfAddedItem,
+                "The product added is not the same as the product in the cart.");
     }
 }
