@@ -26,4 +26,7 @@ public class CartPage extends BasicPage{
     public boolean doesItemPriceIsPresented () {
         return elementExists(By.className("inventory_item_price"));
     }
+    public boolean doesItemQuantityIsPresented () {
+        return elementExists(By.className("cart_quantity"));
+    }
 }
