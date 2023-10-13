@@ -3,7 +3,6 @@ package tests;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.CartPage;
 import retry.SwagLabsRetry;
 
 
@@ -515,5 +514,23 @@ public class SwagLabsTests extends BasicTest {
         topNavPage.clickOnShoppingCartButton();
 
         cartPage.waitForItemTitleToBeClickable();
+    }
+
+    @Test (priority = 32, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheItemsTitleIsWorking () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        inventoryPage.addItemToCart(By.id("add-to-cart-sauce-labs-backpack"));
+        topNavPage.clickOnShoppingCartButton();
+
+        cartPage.waitForItemTitleToBeClickable();
+
+        Assert.assertTrue(pageUrl.isInventoryItemPage(),
+                "Should be redirected to inventory item page after clicking on item title.");
     }
 }
