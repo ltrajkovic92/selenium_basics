@@ -53,4 +53,7 @@ public class CartPage extends BasicPage{
     public void clickOnRemoveButton () {
         getRemoveButton().click();
     }
+    public void clickOnContinueShoppingButton () {
+        getContinueShoppingButton().click();
+    }
 }
