@@ -400,4 +400,21 @@ public class SwagLabsTests extends BasicTest {
         Assert.assertTrue(leftNavPage.doesEkisButtonExistInMenu(),
                 "Ekis button should be visible in menu.");
     }
+
+    @Test (priority = 25, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheEkisButtonIsWorking () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        topNavPage.clickOnShoppingCartButton();
+        topNavPage.clickMenuButton();
+        leftNavPage.waitForMenuToBeVisible();
+        leftNavPage.clickEkisButton();
+
+        leftNavPage.waitForMenuToBeInvisible();
+    }
 }

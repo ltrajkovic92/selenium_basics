@@ -19,6 +19,11 @@ public class LeftNavPage extends BasicPage {
                 .until(ExpectedConditions.visibilityOfElementLocated(By.className("bm-menu-wrap")));
 
     }
+    public void waitForMenuToBeInvisible () {
+        wait
+                .withMessage("Menu wrap is still visible after clicking on ekis button.")
+                .until(ExpectedConditions.invisibilityOfElementLocated(By.className("bm-item-list")));
+    }
 
     public boolean doesLogoutButtonExist() {
         return elementExists(By.linkText("Logout"), 1);
@@ -75,5 +80,12 @@ public class LeftNavPage extends BasicPage {
     public boolean doesEkisButtonExistInMenu () {
         return elementExists(By.id ("react-burger-cross-btn"));
     }
+    public WebElement getEkisButton () {
+        return driver.findElement(By.id("react-burger-cross-btn"));
+    }
+    public void clickEkisButton () {
+        getEkisButton().click();
+    }
+
 }
 
