@@ -455,4 +455,21 @@ public class SwagLabsTests extends BasicTest {
         Assert.assertTrue(cartPage.doesItemTitleIsPresented(),
                 "Title of the added item should be visible.");
     }
+
+    @Test (priority = 28, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheItemsDescriptionIsPresented () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+        String nameOfAddedItem = "Sauce Labs Backpack";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        inventoryPage.addItemToCart(By.id("add-to-cart-sauce-labs-backpack"));
+        topNavPage.clickOnShoppingCartButton();
+
+        Assert.assertTrue(cartPage.doesItemDescriptionIsPresented(),
+                "Description of the added item should be visible.");
+    }
 }
