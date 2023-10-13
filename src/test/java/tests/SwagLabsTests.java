@@ -633,4 +633,21 @@ public class SwagLabsTests extends BasicTest {
         Assert.assertTrue(pageUrl.isCheckoutPage(),
                 "Should be redirected to the checkout page.");
     }
+
+    @Test (priority = 39, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheTwitterButtonIsPresented () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        topNavPage.clickOnShoppingCartButton();
+
+        footer.scrollToFooter();
+
+        Assert.assertTrue(footer.getTwitter().isDisplayed(),
+                "Twitter button should be visible.");
+    }
 }
