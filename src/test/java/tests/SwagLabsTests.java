@@ -436,6 +436,23 @@ public class SwagLabsTests extends BasicTest {
                 "There are no items in the cart.");
 
         Assert.assertEquals(cartPage.getNameFromAddedItem(),nameOfAddedItem,
-                "The product added is not the same as the product in the cart.");
+                "The item added is not the same as the item in the cart.");
+    }
+
+    @Test (priority = 27, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheItemsTitleIsPresented () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+        String nameOfAddedItem = "Sauce Labs Backpack";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickLoginButton();
+
+        inventoryPage.addItemToCart(By.id("add-to-cart-sauce-labs-backpack"));
+        topNavPage.clickOnShoppingCartButton();
+
+        Assert.assertTrue(cartPage.doesItemTitleIsPresented(),
+                "Title of the added item should be visible.");
     }
 }
